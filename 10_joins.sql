@@ -21,14 +21,14 @@ WHERE D.DepNom = 'Recherche';
 -- e) Liste des employés (EmpNom) avec le nom et la durée des projets sur lesquels ils travaillent (ProjetNom, Durée)
 SELECT E.EmpName, P.ProjectName, A.Duration
 FROM Employees E
-         INNER JOIN Affect A on E.EmpNo = A.EmpNo
-         INNER JOIN Projects P on A.ProjectNo = P.ProjectNo;
+         INNER JOIN Affect A ON E.EmpNo = A.EmpNo
+         INNER JOIN Projects P ON A.ProjectNo = P.ProjectNo;
 
 /* f) Liste des employés (EmpNom) avec le nom de leur département (DepNom) et avec le nom et la durée des projets sur
       lesquels ils travaillent (ProjetNom, durée)
 */
 SELECT E.EmpName, D.DepNom, P.ProjectName, A.Duration
 FROM Employees E
-         INNER JOIN Departments D on E.DepNo = D.DepNo
-         INNER JOIN Affect A on E.EmpNo = A.EmpNo
-         INNER JOIN Projects P on A.ProjectNo = P.ProjectNo;
+         INNER JOIN Departments D ON E.DepNo = D.DepNo
+         INNER JOIN Affect A ON E.EmpNo = A.EmpNo
+         INNER JOIN Projects P ON A.ProjectNo = P.ProjectNo;
