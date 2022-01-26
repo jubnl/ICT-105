@@ -1,8 +1,11 @@
 -- a) Liste du nom des employés par ordre alphabétique
-SELECT EmpName FROM Employees ORDER BY EmpName;
+SELECT EmpName
+FROM Employees
+ORDER BY EmpName;
 
 -- b) Nombre de projet
-SELECT COUNT(ProjectNo) Amount FROM Projects;
+SELECT COUNT(ProjectNo) Amount
+FROM Projects;
 
 -- c) Liste des employés (EmpNom) avec le nom de leur département (DepNom)
 SELECT E.EmpName, D.DepNom
