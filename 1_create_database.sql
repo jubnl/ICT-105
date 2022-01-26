@@ -3,27 +3,21 @@ CREATE DATABASE IF NOT EXISTS `ich105DML`;
 USE `ich105DML`;
 CREATE TABLE tblClasses
 (
-    Classe INT  NOT NULL,
+    Classe INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     SalMin REAL NULL,
     SalMax REAL NULL
 );
 
-ALTER TABLE tblClasses
-    ADD CONSTRAINT PKtblClasses PRIMARY KEY (Classe);
-
 CREATE TABLE tblDepartements
 (
-    DNo  INT      NOT NULL,
+    DNo  INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     DNom CHAR(20) NULL,
     DLoc CHAR(20) NULL
 );
 
-ALTER TABLE tblDepartements
-    ADD CONSTRAINT PKtblDepartements PRIMARY KEY (DNo);
-
 CREATE TABLE tblEmployes
 (
-    ENo    INT      NOT NULL,
+    ENo    INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     ENom   CHAR(20) NOT NULL,
     EJob   CHAR(20) NOT NULL,
     EChef  INT      NULL,
@@ -34,15 +28,13 @@ CREATE TABLE tblEmployes
 );
 
 ALTER TABLE tblEmployes
-    ADD CONSTRAINT PKtblEmployes PRIMARY KEY (ENo);
-ALTER TABLE tblEmployes
     ADD CONSTRAINT FKtblEmployestblDepartements FOREIGN KEY (DNo) REFERENCES tblDepartements (DNo);
 ALTER TABLE tblEmployes
     ADD CONSTRAINT FKtblEmployesChef FOREIGN KEY (Echef) REFERENCES tblEmployes (ENo);
 
 CREATE TABLE tblEmployesArchives
 (
-    ENo    INT      NOT NULL,
+    ENo    INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     ENom   CHAR(20) NOT NULL,
     EJob   CHAR(20) NOT NULL,
     EChef  INT      NULL,
@@ -52,20 +44,12 @@ CREATE TABLE tblEmployesArchives
     DNo    INT      NULL
 );
 
-ALTER TABLE tblEmployesArchives
-    ADD CONSTRAINT PKtblEmployesArchives PRIMARY KEY (ENo);
-
 CREATE TABLE tblGratifications
 (
-    Eno           INT  NOT NULL,
+    Eno           INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     Annee         INT  NOT NULL,
     Gratification REAL NULL
 );
-
-ALTER TABLE tblGratifications
-    ADD CONSTRAINT PKtblGratifications PRIMARY KEY (ENo, Annee);
-
-
 
 INSERT INTO tblClasses (Classe, SalMin, SalMax)
 VALUES (1, 700.0000, 1199.0000),

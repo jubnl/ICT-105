@@ -37,7 +37,7 @@ WHERE (Esal + COALESCE(ECom, 0)) * 1.1 BETWEEN 2000 and 3000;
 -- e : Liste des employés engagés en 1997 en tant que « ouvrier » ou « manager » avec un salaire plus petit que 1500
 SELECT *
 FROM tblEmployes
-WHERE YEAR(EDebut) = '1997'
+WHERE YEAR(EDebut) = 1997
   AND EJob IN ('Ouvrier', 'Manager')
   AND Esal < 1500;
 
