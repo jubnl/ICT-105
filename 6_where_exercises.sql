@@ -8,12 +8,19 @@ WHERE DNo = 30
   AND EJob NOT IN ('Ouvrier', 'Vendeur')
   AND EDebut < DATE('2000-01-01');
 
+SELECT *
+FROM tblEmployes
+WHERE DNo = 30
+  AND Esal > 1500
+  AND EJob NOT IN ('Ouvrier', 'Vendeur')
+  AND EDebut < '20000101';
+
 /* b : liste des employés qui touchent moins de 1500 ou plus de 2000 (salaire et commission) et qui sont analyste ou
    vendeur et qui ont un chef.
  */
 SELECT *
 FROM `tblEmployes`
-WHERE (Esal + COALESCE(ECom, 0)) NOT BETWEEN 1500 AND 2000
+WHERE (Esal + IFNULL(ECom, 0)) NOT BETWEEN 1500 AND 2000
   AND EJob IN ('Analyste', 'Vendeur')
   AND EChef IS NOT NULL;
 
@@ -24,7 +31,7 @@ SELECT *
 FROM tblEmployes
 WHERE NOT ISNULL(ECom)
   AND ENom NOT LIKE '%z%'
-  AND EJob NOT LIKE 'o%'
+  AND EJob LIKE 'o%'
 ORDER BY ENom;
 
 /* d : Liste des employés qui auraient droit à une augmentation de salaire de 10% si leur futur salaire serait compris
@@ -32,7 +39,7 @@ ORDER BY ENom;
  */
 SELECT *
 FROM tblEmployes
-WHERE (Esal + COALESCE(ECom, 0)) * 1.1 BETWEEN 2000 and 3000;
+WHERE Esal * 1.1 BETWEEN 2000 and 3000;
 
 -- e : Liste des employés engagés en 1997 en tant que « ouvrier » ou « manager » avec un salaire plus petit que 1500
 SELECT *
@@ -44,7 +51,7 @@ WHERE YEAR(EDebut) = 1997
 /* f : Liste des ouvriers avec leur année d’ancienneté du plus ancien vers le plus récent. Ancienneté = nombre d’année
    de travail du collaborateur dans l’entreprise
  */
-SELECT *, TIMESTAMPDIFF(year, EDebut, NOW()) AS 'Anciennete'
+SELECT *, TIMESTAMPDIFF(year, EDebut, NOW()) 'Anciennete'
 FROM tblEmployes
 WHERE EJob = 'Ouvrier'
 ORDER BY EDebut;
