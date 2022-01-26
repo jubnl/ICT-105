@@ -67,14 +67,14 @@ ALTER TABLE tblGratifications
 
 
 
-INSERT tblClasses (Classe, SalMin, SalMax)
+INSERT INTO tblClasses (Classe, SalMin, SalMax)
 VALUES (1, 700.0000, 1199.0000),
        (2, 1200.0000, 1399.0000),
        (3, 1400.0000, 1999.0000),
        (4, 2000.0000, 2999.0000),
        (5, 3000.0000, 10000.0000);
 
-INSERT tblDepartements (DNo, DNom, DLoc)
+INSERT INTO tblDepartements (DNo, DNom, DLoc)
 VALUES (10, 'Comptabilité', 'Genève'),
        (20, 'Recherche', 'Lausanne'),
        (30, 'Vente', 'Fribourg'),
@@ -82,7 +82,7 @@ VALUES (10, 'Comptabilité', 'Genève'),
        (50, 'Marketing', 'Lausanne'),
        (60, 'MI5', 'Lausanne');
 
-INSERT tblEmployes (ENo, ENom, EJob, EChef, EDebut, Esal, ECom, DNo)
+INSERT INTO tblEmployes (ENo, ENom, EJob, EChef, EDebut, Esal, ECom, DNo)
 VALUES (7839, 'Stoll', 'Président', NULL, '19910215', 1500.0000, NULL, 10),
        (7566, 'Cartier', 'Manager', 7839, '19950531', 2975.0000, 500.0000, 20),
        (7698, 'Blanc', 'Manager', 7839, '19940528', 3850.0000, 14000.0000, 30),
@@ -98,12 +98,12 @@ VALUES (7839, 'Stoll', 'Président', NULL, '19910215', 1500.0000, NULL, 10),
        (7900, 'Jan', 'Ouvrier', 7698, '19911013', 3000.0000, 0.0000, 30),
        (7934, 'Tripet', 'Ouvrier', 7782, '19940801', 1300.0000, NULL, 10);
 
-INSERT tblEmployesArchives (ENo, ENom, EJob, EChef, EDebut, Esal, ECom, DNo)
+INSERT INTO tblEmployesArchives (ENo, ENom, EJob, EChef, EDebut, Esal, ECom, DNo)
 VALUES (7999, 'Kurt', 'Gardien', 7839, '19910215', 1500.0000, NULL, 20),
        (7998, 'Klauss', 'Ouvrier', 7839, '19920401', 1650.0000, NULL, 10),
        (7997, 'Kottak', 'vendeur', 7902, '19991225', 1833.0000, NULL, 30);
 
-INSERT tblGratifications (Eno, Annee, Gratification)
+INSERT INTO tblGratifications (Eno, Annee, Gratification)
 VALUES (7028, 2000, 3000.0000),
        (7521, 2001, 1500.0000),
        (7698, 2000, 2000.0000),

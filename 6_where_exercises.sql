@@ -5,8 +5,7 @@ SELECT *
 FROM tblEmployes
 WHERE DNo = 30
   AND Esal > 1500
-  AND EJob != 'Ouvrier'
-  AND EJob != 'Vendeur'
+  AND EJob NOT IN ('Ouvrier', 'Vendeur')
   AND EDebut < DATE('2000-01-01');
 
 /* b : liste des employés qui touchent moins de 1500 ou plus de 2000 (salaire et commission) et qui sont analyste ou
