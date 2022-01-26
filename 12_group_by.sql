@@ -80,7 +80,7 @@ ORDER BY salary, tE.EJob;
 
 -- h) liste des années d’engagement par département.
 SELECT tD.DNom                                    departmentName,
-       MAX(TIMESTAMPDIFF(year, tE.EDebut, NOW())) Anciennete
+       MAX(TIMESTAMPDIFF(year, tE.EDebut, NOW())) SeniorityPerDepartment
 FROM tblEmployes tE
          INNER JOIN tblDepartements tD on tE.DNo = tD.DNo
 GROUP BY tD.DNom
