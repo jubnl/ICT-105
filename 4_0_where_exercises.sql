@@ -84,16 +84,19 @@ WHERE DNo = 10
   AND EJob NOT IN ('Manager', 'Vendeur');
 
 -- l : liste des noms, salaires, commissions, salaires versés des employés dont la commission dépasse le 25% du salaire
-SELECT ENom, Esal, ECom, Esal + COALESCE(ECom, 0) 'Salaire verse'
+SELECT ENom                     employeeName,
+       Esal                     salary,
+       ECom                     commission,
+       Esal + COALESCE(ECom, 0) totalSalary
 FROM tblEmployes
 WHERE COALESCE(ECom, 0) > Esal * 0.25;
 
 -- m : liste des jobs dont les employés n’ont pas droit à une commission
-SELECT DISTINCT EJob
+SELECT DISTINCT EJob jobName
 FROM tblEmployes
 WHERE ECom IS NULL;
 
-SELECT DISTINCT EJob
+SELECT DISTINCT EJob jobName
 FROM tblEmployes
 WHERE EJob NOT IN (
     SELECT EJob
@@ -101,7 +104,7 @@ WHERE EJob NOT IN (
     WHERE ECom IS NOT NULL
 );
 
-SELECT DISTINCT EJob
+SELECT DISTINCT EJob jobName
 FROM tblEmployes
 WHERE EJob NOT IN (
     SELECT EJob

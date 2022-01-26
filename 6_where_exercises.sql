@@ -51,7 +51,7 @@ WHERE YEAR(EDebut) = 1997
 /* f : Liste des ouvriers avec leur année d’ancienneté du plus ancien vers le plus récent. Ancienneté = nombre d’année
    de travail du collaborateur dans l’entreprise
  */
-SELECT *, TIMESTAMPDIFF(year, EDebut, NOW()) 'Anciennete'
+SELECT *, TIMESTAMPDIFF(year, EDebut, NOW()) Seniority
 FROM tblEmployes
 WHERE EJob = 'Ouvrier'
 ORDER BY EDebut;

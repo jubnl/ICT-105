@@ -4,27 +4,27 @@ USE `ich105DML`;
 CREATE TABLE tblClasses
 (
     Classe INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    SalMin REAL NULL,
-    SalMax REAL NULL
+    SalMin REAL                           NULL,
+    SalMax REAL                           NULL
 );
 
 CREATE TABLE tblDepartements
 (
     DNo  INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    DNom CHAR(20) NULL,
-    DLoc CHAR(20) NULL
+    DNom CHAR(20)                       NULL,
+    DLoc CHAR(20)                       NULL
 );
 
 CREATE TABLE tblEmployes
 (
     ENo    INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    ENom   CHAR(20) NOT NULL,
-    EJob   CHAR(20) NOT NULL,
-    EChef  INT      NULL,
-    EDebut DATE     NULL,
-    Esal   REAL     NULL,
-    ECom   REAL     NULL,
-    DNo    INT      NOT NULL
+    ENom   CHAR(20)                       NOT NULL,
+    EJob   CHAR(20)                       NOT NULL,
+    EChef  INT                            NULL,
+    EDebut DATE                           NULL,
+    Esal   REAL                           NULL,
+    ECom   REAL                           NULL,
+    DNo    INT                            NOT NULL
 );
 
 ALTER TABLE tblEmployes
@@ -35,20 +35,20 @@ ALTER TABLE tblEmployes
 CREATE TABLE tblEmployesArchives
 (
     ENo    INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    ENom   CHAR(20) NOT NULL,
-    EJob   CHAR(20) NOT NULL,
-    EChef  INT      NULL,
-    EDebut datetime NULL,
-    Esal   REAL     NULL,
-    ECom   REAL     NULL,
-    DNo    INT      NULL
+    ENom   CHAR(20)                       NOT NULL,
+    EJob   CHAR(20)                       NOT NULL,
+    EChef  INT                            NULL,
+    EDebut datetime                       NULL,
+    Esal   REAL                           NULL,
+    ECom   REAL                           NULL,
+    DNo    INT                            NULL
 );
 
 CREATE TABLE tblGratifications
 (
     Eno           INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    Annee         INT  NOT NULL,
-    Gratification REAL NULL
+    Annee         INT                            NOT NULL,
+    Gratification REAL                           NULL
 );
 
 INSERT INTO tblClasses (Classe, SalMin, SalMax)
