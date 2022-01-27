@@ -1,21 +1,21 @@
 -- a) liste des départements qui n'ont pas d'employé (avec jointure externe)
-SELECT tD.*
+SELECT tD.DNom
 FROM tblDepartements tD
          LEFT JOIN tblEmployes tE on tD.DNo = tE.DNo
 WHERE tE.DNo IS NULL;
 
-SELECT tD.*
+SELECT tD.DNom
 FROM tblEmployes tE
          RIGHT JOIN tblDepartements tD on tE.DNo = tD.DNo
 WHERE tE.DNo IS NULL;
 
 -- b) liste de tous les départements avec leur nombre d'employés (avec jointure externe)
-SELECT tD.*, COUNT(tE.ENo)
+SELECT tD.DNom, COUNT(tE.ENo)
 FROM tblDepartements tD
          LEFT JOIN tblEmployes tE on tD.DNo = tE.DNo
 GROUP BY tD.DNom;
 
-SELECT tD.*, COUNT(tE.ENo)
+SELECT tD.DNom, COUNT(tE.ENo)
 FROM tblEmployes tE
          RIGHT JOIN tblDepartements tD on tD.DNo = tE.DNo
 GROUP BY tD.DNom;
@@ -52,14 +52,14 @@ FROM tblEmployes CEO
 ORDER BY emp.ENom;
 
 -- e) liste de tous les départements basé à Lausanne avec la somme des salaires (ESal) à versés (avec jointure externe)
-SELECT dep.*,
+SELECT dep.DNom,
        IFNULL(SUM(emp.Esal), 0) totalSalary
 FROM tblDepartements dep
          LEFT JOIN tblEmployes emp on dep.DNo = emp.DNo
 WHERE dep.DLoc = 'lausanne'
 GROUP BY dep.DNo;
 
-SELECT dep.*,
+SELECT dep.DNom,
        IFNULL(SUM(emp.Esal), 0) totalSalary
 FROM tblEmployes emp
          RIGHT JOIN tblDepartements dep on dep.DNo = emp.DNo
@@ -68,12 +68,12 @@ GROUP BY dep.DNo;
 
 /* f) liste des employés avec un N° de département incorrect (N° de département qui n’existerait pas dans la table
 département – Cas sans intégrité référentielle dans la base de données) */
-SELECT dep.*
+SELECT emp.*
 FROM tblEmployes emp
          LEFT JOIN tblDepartements dep on dep.DNo = emp.DNo
 WHERE emp.DNo NOT IN (SELECT DNo FROM tblDepartements);
 
-SELECT dep.*
+SELECT emp.*
 FROM tblDepartements dep
          RIGHT JOIN tblEmployes emp on dep.DNo = emp.DNo
 WHERE emp.DNo NOT IN (SELECT DNo FROM tblDepartements);
