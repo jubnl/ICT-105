@@ -15,42 +15,40 @@ FROM tblDepartements tD
 GROUP BY tD.DNom;
 
 -- c) nom du département, nombre d'employés pour chaque classe, salaire moyen pour chaque classe, salaire minimum pour chaque classe
-SELECT tC.Classe                   salaryClass,
-       tD.DNom                     departmentName,
-       COUNT(tE.ENo)               employeeAmountPerClass,
-       (tC.SalMin + tC.SalMax) / 2 avgSalaryPerClass,
-       tC.SalMin                   minimumSalaryPerClass
+SELECT tC.Classe              salaryClass,
+       tD.DNom                departmentName,
+       COUNT(tE.ENo)          employeeAmountPerClass,
+       ROUND(AVG(tE.Esal), 2) avgSalaryPerClass,
+       tC.SalMin              minimumSalaryPerClass
 FROM tblDepartements tD
          INNER JOIN tblEmployes tE ON tD.DNo = tE.DNo
          INNER JOIN tblClasses tC ON tE.Esal BETWEEN tC.SalMin AND tC.SalMax
 GROUP BY tC.Classe
 ORDER BY tC.Classe;
 
-SELECT tC.Classe                        salaryClass,
-       tD.DNom                          departmentName,
-       COUNT(tE.ENo)                    employeeAmountPerClass,
-       AVG((tC.SalMin + tC.SalMax) / 2) avgSalaryPerClass,
-       tC.SalMin                        minimumSalaryPerClass
+SELECT tC.Classe              salaryClass,
+       tD.DNom                departmentName,
+       COUNT(tE.ENo)          employeeAmountPerClass,
+       ROUND(AVG(tE.Esal), 2) avgSalaryPerClass,
+       tC.SalMin              minimumSalaryPerClass
 FROM tblDepartements tD
          INNER JOIN tblEmployes tE ON tD.DNo = tE.DNo
-         INNER JOIN tblClasses tC
-WHERE tE.Esal BETWEEN tC.SalMin AND tC.SalMax
-GROUP BY tD.DNom, tC.Classe
+         INNER JOIN tblClasses tC on tE.Esal BETWEEN tC.SalMin AND tC.SalMax
+GROUP BY tC.Classe, tD.DNom
 ORDER BY tC.Classe, tD.DNom;
 
 -- d) idem, mais on ne veut que les employés qui ne sont pas "Analystes"
-SELECT tC.Classe                   salaryClass,
-       tD.DNom                     departmentName,
-       COUNT(tE.ENo)               employeeAmountPerClass,
-       (tC.SalMin + tC.SalMax) / 2 avgSalaryPerClass,
-       tC.SalMin                   minimumSalaryPerClass
+SELECT tC.Classe              salaryClass,
+       tD.DNom                departmentName,
+       COUNT(tE.ENo)          employeeAmountPerClass,
+       ROUND(AVG(tE.Esal), 2) avgSalaryPerClass,
+       tC.SalMin              minimumSalaryPerClass
 FROM tblDepartements tD
          INNER JOIN tblEmployes tE ON tD.DNo = tE.DNo
-         INNER JOIN tblClasses tC
-WHERE tE.Esal BETWEEN tC.SalMin AND tC.SalMax
-  AND tE.EJob != 'Analyste'
-GROUP BY tC.Classe
-ORDER BY tC.Classe;
+         INNER JOIN tblClasses tC on tE.Esal BETWEEN tC.SalMin AND tC.SalMax
+WHERE tE.EJob != 'Analyste'
+GROUP BY tD.DNom, tC.Classe
+ORDER BY tC.Classe, tD.DNom;
 
 -- e) nom du job, nombre d'employés ayant ce job, salaire moyen par job et par ordre alphabétique des jobs
 SELECT EJob        jobName,
