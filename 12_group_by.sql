@@ -22,8 +22,7 @@ SELECT tC.Classe                   salaryClass,
        tC.SalMin                   minimumSalaryPerClass
 FROM tblDepartements tD
          INNER JOIN tblEmployes tE ON tD.DNo = tE.DNo
-         INNER JOIN tblClasses tC
-WHERE tE.Esal BETWEEN tC.SalMin AND tC.SalMax
+         INNER JOIN tblClasses tC ON tE.Esal BETWEEN tC.SalMin AND tC.SalMax
 GROUP BY tC.Classe
 ORDER BY tC.Classe;
 
