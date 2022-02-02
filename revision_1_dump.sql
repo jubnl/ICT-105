@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2022.  JackTrash (github/jubnl)
- * All rights reserved.
- */
-
 -- --------------------------------------------------------
 -- Hôte :                        127.0.0.1
 -- Version du serveur:           8.0.19 - MySQL Community Server - GPL
