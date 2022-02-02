@@ -19,4 +19,4 @@ DROP USER IF EXISTS 'Stagiaire'@'%';
 
 SELECT User FROM mysql.user;
 
-SHOW GRANTS FOR 'Stagiaire';
+SHOW GRANTS FOR 'Stagiaire'
