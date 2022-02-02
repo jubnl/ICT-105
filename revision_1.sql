@@ -163,6 +163,7 @@ VALUES ('DOCGA', 'Docteur Gab''s', 'Brasseur', 'Monsieur', 'Ch de Geffry 7', 'Sa
         '+41 21 781 30 90');
 
 -- s) Supprimer toutes les commandes de 1996
+-- drop fk, then create a new one with on delete cascade constraint
 ALTER TABLE orderdetails
     DROP FOREIGN KEY FK_Order_Details_Orders;
 ALTER TABLE orderdetails
@@ -171,6 +172,7 @@ DELETE
 FROM orders
 WHERE YEAR(OrderDate) = 1996;
 
+-- disable key check during delete. /!\ it does not delete order details
 ALTER TABLE `orderdetails`
     DISABLE KEYS;
 DELETE
@@ -178,3 +180,15 @@ FROM orders
 WHERE YEAR(OrderDate) = 1996;
 ALTER TABLE `orderdetails`
     ENABLE KEYS;
+
+-- delete order details 1st, then delete orders
+DELETE
+FROM orderdetails ordDet
+WHERE ordDet.OrderID IN (
+    SELECT ord.OrderID
+    FROM orders ord
+    WHERE YEAR(ord.OrderDate) = 1996
+);
+DELETE
+FROM orders ord
+WHERE YEAR(ord.OrderDate) = 1996;
