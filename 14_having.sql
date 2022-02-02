@@ -62,5 +62,5 @@ FROM tblEmployes employee
          INNER JOIN tblEmployes boss on employee.EChef = boss.ENo
          INNER JOIN tblGratifications tgemp on employee.ENo = tgemp.Eno
          INNER JOIN tblGratifications tgboss on boss.ENo = tgboss.Eno
-GROUP BY employee.ENom, boss.ENom
+GROUP BY employee.ENom
 HAVING totemp > totboss;

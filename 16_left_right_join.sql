@@ -10,12 +10,12 @@ FROM tblEmployes tE
 WHERE tE.DNo IS NULL;
 
 -- b) liste de tous les départements avec leur nombre d'employés (avec jointure externe)
-SELECT tD.DNom, COUNT(tE.ENo)
+SELECT tD.DNom, COUNT(tE.ENo) employeeAmount
 FROM tblDepartements tD
          LEFT JOIN tblEmployes tE on tD.DNo = tE.DNo
 GROUP BY tD.DNom;
 
-SELECT tD.DNom, COUNT(tE.ENo)
+SELECT tD.DNom, COUNT(tE.ENo) employeeAmount
 FROM tblEmployes tE
          RIGHT JOIN tblDepartements tD on tD.DNo = tE.DNo
 GROUP BY tD.DNom;
@@ -57,55 +57,62 @@ SELECT dep.DNom,
 FROM tblDepartements dep
          LEFT JOIN tblEmployes emp on dep.DNo = emp.DNo
 WHERE dep.DLoc = 'lausanne'
-GROUP BY dep.DNo;
+GROUP BY dep.DNom;
 
 SELECT dep.DNom,
        IFNULL(SUM(emp.Esal), 0) totalSalary
 FROM tblEmployes emp
          RIGHT JOIN tblDepartements dep on dep.DNo = emp.DNo
 WHERE dep.DLoc = 'lausanne'
-GROUP BY dep.DNo;
+GROUP BY dep.DNom;
 
 /* f) liste des employés avec un N° de département incorrect (N° de département qui n’existerait pas dans la table
 département – Cas sans intégrité référentielle dans la base de données) */
 SELECT emp.*
 FROM tblEmployes emp
          LEFT JOIN tblDepartements dep on dep.DNo = emp.DNo
-WHERE emp.DNo NOT IN (SELECT DNo FROM tblDepartements);
+WHERE dep.DNo IS NULL;
 
 SELECT emp.*
 FROM tblDepartements dep
          RIGHT JOIN tblEmployes emp on dep.DNo = emp.DNo
-WHERE emp.DNo NOT IN (SELECT DNo FROM tblDepartements);
+WHERE dep.DNo IS NULL;
 
 -- g) Collaborateur (nom) de la table tblEmployesArchives qui ne sont pas dans la table tblEmployes
 SELECT arch.ENom
 FROM tblEmployesArchives arch
-         LEFT JOIN tblEmployes emp on arch.ENom = emp.ENom;
+         LEFT JOIN tblEmployes emp on arch.ENo = emp.ENo
+WHERE emp.ENo IS NULL;
 
 SELECT arch.ENom
 FROM tblEmployes emp
-         RIGHT JOIN tblEmployesArchives arch on arch.ENom = emp.ENom;
+         RIGHT JOIN tblEmployesArchives arch on arch.ENo = emp.ENo
+WHERE emp.ENo IS NULL;
 
 -- h) Liste des jobs dans la table tblEmployesArchives qu’on ne retrouve pas dans la table tblEmployes
 SELECT arch.EJob
 FROM tblEmployesArchives arch
          LEFT JOIN tblEmployes emp on emp.EJob = arch.EJob
-WHERE emp.EJob IS NULL;
+WHERE emp.Eno IS NULL;
 
 SELECT arch.EJob
 FROM tblEmployes emp
          RIGHT JOIN tblEmployesArchives arch on emp.EJob = arch.EJob
+WHERE emp.ENo IS NULL;
+
+SELECT arch.EJob
+FROM tblEmployesArchives arch
+         LEFT JOIN tblEmployes emp on emp.EJob = arch.EJob
 WHERE emp.EJob IS NULL;
 
 -- i) Salaire minimum par département en faisant afficher 0.- pour les départements sans employés
-SELECT dep.DNom, IFNULL(MIN(emp.Esal), 0) minSalary
+SELECT dep.DNom departmentName, IFNULL(MIN(emp.Esal), 0) minSalary
 FROM tblDepartements dep
          LEFT JOIN tblEmployes emp on dep.DNo = emp.DNo
 GROUP BY dep.DNom
 ORDER BY minSalary DESC;
 
-SELECT dep.DNom, IFNULL(MIN(emp.Esal), 0) minSalary
+SELECT dep.DNom departmentName, IFNULL(MIN(emp.Esal), 0) minSalary
 FROM tblEmployes emp
          RIGHT JOIN tblDepartements dep on dep.DNo = emp.DNo
 GROUP BY dep.DNom
