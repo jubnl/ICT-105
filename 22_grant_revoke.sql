@@ -13,7 +13,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON `tblDepartements` TO 'Stagiaire';
 
 GRANT SELECT ON `tblEmployes` TO 'Stagiaire';
 
-REVOKE SELECT ON `tblEmployes` TO 'Stagiaire';
+REVOKE SELECT ON `tblEmployes` FROM 'Stagiaire';
 
 DROP USER IF EXISTS 'Stagiaire'@'%';
 
